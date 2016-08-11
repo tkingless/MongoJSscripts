@@ -10,7 +10,8 @@ print(db.getName());
 
 var nowTime = new Date();
 
-var qurieddate = db.MatchEvents.find( {"commence" : {"$lt": nowTime} }).limit(3); //not working
+//https://github.com/mde/date-fu
+var qurieddate = db.MatchEvents.find( {"commence" : {"$lt": nowTime} }).limit(3);
 //var cursor = db.MatchEvents.find({});
 
 helloWorld();
