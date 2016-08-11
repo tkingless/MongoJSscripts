@@ -1,4 +1,5 @@
-function convertArrayOfObjectsToCSV(args) {  
+//http://halistechnology.com/2015/05/28/use-javascript-to-export-your-data-as-csv/
+function convertArrayOfObjectsToCSV(args) {
         var result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
         data = args.data || null;
@@ -27,6 +28,25 @@ function convertArrayOfObjectsToCSV(args) {
         });
 
         return result;
+}
+
+//http://stackoverflow.com/questions/8847766/how-to-convert-json-to-csv-format-and-store-in-a-variable
+function ConvertToCSV(objArray) {
+    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    var str = '';
+
+    for (var i = 0; i < array.length; i++) {
+        var line = '';
+        for (var index in array[i]) {
+            if (line != '') line += ','
+
+            line += array[i][index];
+        }
+
+        str += line + '\r\n';
+    }
+
+    return str;
 }
 
 function helloWorld() {

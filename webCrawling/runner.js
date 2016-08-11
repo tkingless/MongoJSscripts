@@ -8,6 +8,11 @@ load('csv.js');
 db = connect("localhost:27017/MongoProdWebcrawling");
 print(db.getName());
 
+var nowTime = new Date();
+
+var qurieddate = db.MatchEvents.find( {"commence" : {"$lt": nowTime} }).limit(3); //not working
+//var cursor = db.MatchEvents.find({});
+
 helloWorld();
 
 //Rundown:
