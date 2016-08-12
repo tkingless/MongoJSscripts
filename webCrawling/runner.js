@@ -8,18 +8,26 @@ load('lib/index.js');
 
 //Declarations of const
 db = connect("localhost:27017/MongoProdWebcrawling");
+print("Entered DB: " + db.getName());
 
+//date is the handler from Datefu, a nice contributer from https://github.com/mde/date-fu
 var dateParts = date.dateParts;
-print(db.getName());
 
-var nowTime = new Date();
-print("Before nowTime is:" + nowTime);
 
-nowTime = date.add(nowTime, dateParts.HOUR, -13);
-print("After nowTime is:" + nowTime);
+var recentEventsDate = new Date();
+print("Before recentEventsDate is:" + recentEventsDate);
+recentEventsDate = date.add(recentEventsDate, dateParts.HOUR, -6);
+print("After recentEventsDate is:" + recentEventsDate);
 
-//var qurieddate = db.MatchEvents.find( {"commence" : {"$lt": nowTime} }).limit(3);
-//var cursor = db.MatchEvents.find({});
+var recentEventCursor = db.MatchEvents.find( { "lastModifiedAt" : {"$gte": recentEventsDate} } , { MatchId:1, commence:1} ).limit(3);
+
+
+while(recentEventCursor.hasNext()) {
+    var obj = recentEventCursor.next();
+    //var id = obj._id;
+    //print(tojson(id));
+    print(tojson(obj));
+}
 
 helloWorld();
 
