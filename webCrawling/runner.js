@@ -4,14 +4,21 @@
 //file naming: matchid_teams.csv
 
 load('csv.js');
+load('lib/index.js');
 
+//Declarations of const
 db = connect("localhost:27017/MongoProdWebcrawling");
+
+var dateParts = date.dateParts;
 print(db.getName());
 
 var nowTime = new Date();
+print("Before nowTime is:" + nowTime);
 
-//https://github.com/mde/date-fu
-var qurieddate = db.MatchEvents.find( {"commence" : {"$lt": nowTime} }).limit(3);
+nowTime = date.add(nowTime, dateParts.HOUR, -13);
+print("After nowTime is:" + nowTime);
+
+//var qurieddate = db.MatchEvents.find( {"commence" : {"$lt": nowTime} }).limit(3);
 //var cursor = db.MatchEvents.find({});
 
 helloWorld();
